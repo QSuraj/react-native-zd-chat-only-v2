@@ -17,7 +17,7 @@ public class RNZendeskChatPackage implements ReactPackage {
             ReactApplicationContext reactContext) {
         List<NativeModule> modules = new ArrayList<>();
 
-        modules.add(new RNZendeskChatModule(reactContext));
+        modules.add(new RNZendeskChatOnlyModule(reactContext));
         return modules;
     }
 

@@ -35,8 +35,8 @@ import com.zendesk.service.ZendeskCallback;
 import java.lang.String;
 import java.util.ArrayList;
 
-public class RNZendeskChatModule extends ReactContextBaseJavaModule {
-    private static final String TAG = "[RNZendeskChatModule]";
+public class RNZendeskChatOnlyModule extends ReactContextBaseJavaModule {
+    private static final String TAG = "[RNZendeskChatOnlyModule]";
 
     private ArrayList<String> currentUserTags = new ArrayList();
 
@@ -51,7 +51,7 @@ public class RNZendeskChatModule extends ReactContextBaseJavaModule {
             return result;
         }
         if (options.getType(key) != ReadableType.Array) {
-            Log.e(RNZendeskChatModule.TAG, "wrong type for key '" + key + "' when processing " + functionHint
+            Log.e(RNZendeskChatOnlyModule.TAG, "wrong type for key '" + key + "' when processing " + functionHint
                     + ", expected an Array of Strings.");
             return result;
         }
@@ -61,7 +61,7 @@ public class RNZendeskChatModule extends ReactContextBaseJavaModule {
                 continue;
             }
             if (arr.getType(i) != ReadableType.String) {
-                Log.e(RNZendeskChatModule.TAG, "wrong type for key '" + key + "[" + i + "]' when processing "
+                Log.e(RNZendeskChatOnlyModule.TAG, "wrong type for key '" + key + "[" + i + "]' when processing "
                         + functionHint + ", expected entry to be a String.");
             }
             result.add(arr.getString(i));
@@ -74,7 +74,7 @@ public class RNZendeskChatModule extends ReactContextBaseJavaModule {
             return null;
         }
         if (options.getType(key) != ReadableType.String) {
-            Log.e(RNZendeskChatModule.TAG,
+            Log.e(RNZendeskChatOnlyModule.TAG,
                     "wrong type for key '" + key + "' when processing " + functionHint + ", expected a String.");
             return null;
         }
@@ -86,7 +86,7 @@ public class RNZendeskChatModule extends ReactContextBaseJavaModule {
             return defaultValue;
         }
         if (options.getType(key) != ReadableType.String) {
-            Log.e(RNZendeskChatModule.TAG,
+            Log.e(RNZendeskChatOnlyModule.TAG,
                     "wrong type for key '" + key + "' when processing " + functionHint + ", expected an Integer.");
             return defaultValue;
         }
@@ -99,7 +99,7 @@ public class RNZendeskChatModule extends ReactContextBaseJavaModule {
             return defaultValue;
         }
         if (options.getType(key) != ReadableType.Boolean) {
-            Log.e(RNZendeskChatModule.TAG,
+            Log.e(RNZendeskChatOnlyModule.TAG,
                     "wrong type for key '" + key + "' when processing " + functionHint + ", expected a Boolean.");
             return defaultValue;
         }
@@ -112,7 +112,7 @@ public class RNZendeskChatModule extends ReactContextBaseJavaModule {
             return defaultValue;
         }
         if (options.getType(key) != ReadableType.String) {
-            Log.e(RNZendeskChatModule.TAG, "wrong type for key '" + key
+            Log.e(RNZendeskChatOnlyModule.TAG, "wrong type for key '" + key
                     + "' when processing startChat(preChatFormOptions), expected one of ('required' | 'optional' | 'hidden').");
             return defaultValue;
         }
@@ -124,7 +124,7 @@ public class RNZendeskChatModule extends ReactContextBaseJavaModule {
             case "hidden":
                 return PreChatFormFieldStatus.HIDDEN;
             default:
-                Log.e(RNZendeskChatModule.TAG, "wrong type for key '" + key
+                Log.e(RNZendeskChatOnlyModule.TAG, "wrong type for key '" + key
                         + "' when processing startChat(preChatFormOptions), expected one of ('required' | 'optional' | 'hidden').");
                 return defaultValue;
         }
@@ -135,7 +135,7 @@ public class RNZendeskChatModule extends ReactContextBaseJavaModule {
             return new WritableNativeMap();
         }
         if (options.getType(key) != ReadableType.Map) {
-            Log.e(RNZendeskChatModule.TAG,
+            Log.e(RNZendeskChatOnlyModule.TAG,
                     "wrong type for key '" + key + "' when processing " + functionHint + ", expected a config hash.");
             return new WritableNativeMap();
         }
@@ -163,14 +163,14 @@ public class RNZendeskChatModule extends ReactContextBaseJavaModule {
 
     private ReactContext mReactContext;
 
-    public RNZendeskChatModule(ReactApplicationContext reactContext) {
+    public RNZendeskChatOnlyModule(ReactApplicationContext reactContext) {
         super(reactContext);
         mReactContext = reactContext;
     }
 
     @Override
     public String getName() {
-        return "RNZendeskChatModule";
+        return "RNZendeskChatOnlyModule";
     }
 
     @ReactMethod
@@ -269,7 +269,7 @@ public class RNZendeskChatModule extends ReactContextBaseJavaModule {
         ProfileProvider profileProvider = Chat.INSTANCE.providers().profileProvider();
         ArrayList<String> activeTags = (ArrayList<String>) currentUserTags.clone();
 
-        ArrayList<String> allProvidedTags = RNZendeskChatModule.getArrayListOfStrings(options, "tags", "startChat");
+        ArrayList<String> allProvidedTags = RNZendeskChatOnlyModule.getArrayListOfStrings(options, "tags", "startChat");
         ArrayList<String> newlyIntroducedTags = (ArrayList<String>) allProvidedTags.clone();
 
         newlyIntroducedTags.remove(activeTags); // Now just includes tags to add
@@ -312,7 +312,7 @@ public class RNZendeskChatModule extends ReactContextBaseJavaModule {
         pendingVisitorInfo = null;
         boolean didSetVisitorInfo = _setVisitorInfo(options);
 
-        ReadableMap flagHash = RNZendeskChatModule.getReadableMap(options, "behaviorFlags", "startChat");
+        ReadableMap flagHash = RNZendeskChatOnlyModule.getReadableMap(options, "behaviorFlags", "startChat");
 
         boolean showPreChatForm = getBooleanOrDefault(flagHash, "showPreChatForm", "startChat(behaviorFlags)", true);
         boolean needsToSetVisitorInfoAfterChatStart = showPreChatForm && didSetVisitorInfo;
@@ -325,7 +325,7 @@ public class RNZendeskChatModule extends ReactContextBaseJavaModule {
         }
         ChatConfiguration chatConfig = chatBuilder.build();
 
-        String department = RNZendeskChatModule.getStringOrNull(options, "department", "startChat");
+        String department = RNZendeskChatOnlyModule.getStringOrNull(options, "department", "startChat");
         if (department != null) {
             Chat.INSTANCE.providers().chatProvider().setDepartment(department, null);
         }

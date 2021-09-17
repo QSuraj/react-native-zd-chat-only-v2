@@ -1,12 +1,12 @@
 {
-	"name": "react-native-zendesk-chat",
+	"name": "react-native-zendesk-chat-only",
 	"version": "0.4.1",
 	"description": "React Native Wrapper around Zopim Zendesk Chat",
 	"main": "index.js",
-	"types": "RNZendeskChat.d.ts",
+	"types": "RNZendeskChatOnly.d.ts",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/taskrabbit/react-native-zendesk-chat"
+		"url": "https://SurajQuizizz@bitbucket.org/SurajQuizizz/react-native-zd-chat-only-v2.git"
 	},
 	"scripts": {
 		"prettier": "prettier",

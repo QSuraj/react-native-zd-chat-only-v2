@@ -75,7 +75,7 @@ declare module "react-native-zendesk-chat" {
 		localizedDismissButtonTitle?: string;
 	}
 
-	class RNZendeskChatModuleImpl {
+	class RNZendeskChatOnlyModuleImpl {
 		/**
 		 * Must be called before calling startChat/setVisitorInfo
 		 * - (Advanced users may configure this natively instead of calling this from JS)
@@ -88,7 +88,7 @@ declare module "react-native-zendesk-chat" {
 		startChat: (options: StartChatOptions) => void;
 		/**
 		 * Backwards Compatibility!
-		 * - You can pass all these parameters to RNZendeskChatModule.startChat
+		 * - You can pass all these parameters to RNZendeskChatOnlyModule.startChat
 		 * - So you should probably prefer that method
 		 */
 		setVisitorInfo: (options: VisitorInfoOptions) => void;
@@ -104,7 +104,7 @@ declare module "react-native-zendesk-chat" {
 		areAgentsOnline: () => Promise<Boolean>;
 	}
 
-	const RNZendeskChatModule: RNZendeskChatModuleImpl;
+	const RNZendeskChatOnlyModule: RNZendeskChatOnlyModuleImpl;
 
-	export default RNZendeskChatModule;
+	export default RNZendeskChatOnlyModule;
 }
