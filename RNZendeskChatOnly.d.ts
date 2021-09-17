@@ -1,4 +1,4 @@
-declare module "react-native-zendesk-chat" {
+declare module "react-native-zendesk-chat-only" {
 	interface VisitorInfoOptions {
 		name?: string;
 		email?: string;
