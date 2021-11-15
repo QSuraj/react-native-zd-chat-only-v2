@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class RNZendeskChatPackage implements ReactPackage {
+public class RNZendeskChatOnlyPackage implements ReactPackage {
 
     @Override
     public List<NativeModule> createNativeModules(
